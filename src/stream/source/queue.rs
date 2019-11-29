@@ -1,4 +1,4 @@
-/*use crate::actor::{Actor, ActorContext, ActorRef, Spawnable};
+use crate::actor::{Actor, ActorContext, ActorRef, Spawnable};
 use crate::stream::source::Source;
 use crate::stream::{Action, Logic, StreamContext};
 use std::collections::VecDeque;
@@ -211,7 +211,7 @@ where
         &mut self,
         msg: LogicEvent<(), Self::Ctl>,
         ctx: &mut StreamContext<(), A, Self::Ctl>,
-    ) {
+    ) -> Action<A, Self::Ctl> {
         match msg {
             LogicEvent::Pulled => match self.buffer.pop_front() {
                 Some(element) => {
@@ -269,6 +269,8 @@ where
             LogicEvent::Pushed(()) | LogicEvent::Stopped => {}
         }
     }
+
+    None
 }
 
 impl<A> Drop for Queue<A>
@@ -349,4 +351,4 @@ fn test2() {
 
     assert!(ActorSystem::new().spawn(TestReaper::new()).is_ok());
 }
-*/
+

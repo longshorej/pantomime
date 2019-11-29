@@ -263,7 +263,7 @@ pub enum StreamCtl {
     Fail,
 }
 
-struct StreamComplete<Out>
+pub struct StreamComplete<Out>
 where
     Out: 'static + Send,
 {
